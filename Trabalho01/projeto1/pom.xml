@@ -21,5 +21,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <name>projeto01 - p1</name>
 </project>
