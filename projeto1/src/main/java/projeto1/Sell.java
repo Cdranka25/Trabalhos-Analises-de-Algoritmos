@@ -1,33 +1,34 @@
 package projeto1;
 
 public class Sell {
-    public double calculateTotal(Product product, ShippingType shippingType) {
-      double shippingCost = calculateShipping(product, shippingType);
-      return product.price + shippingCost;
+
+    public double calculateTotal(Order order, ShippingType shippingType) {
+        double shippingCost = calculateShipping(order, shippingType);
+        return order.totalPrice() + shippingCost;
     }
 
-    private double calculateShipping(Product product, ShippingType shippingType) {
+    private double calculateShipping(Order order, ShippingType shippingType) {
+        double totalWeight = order.totalWeight();
+
         switch (shippingType) {
             case PAC:
-                if (product.weight <= 1) {
+                if (totalWeight <= 1) {
                     return 10.00;
-                } else if (product.weight <= 2) {
+                } else if (totalWeight <= 2) {
                     return 15.00;
                 } else {
-                    System.out.println("PAC não aceita encomendas acima de 2 kg.");
+                   throw new IllegalArgumentException(
+                    "PAC não aceita encomendas acima de 2 kg. Peso: " + totalWeight + " kg");
                 }
-                break;
 
             case SEDEX:
-                if (product.weight <= 0.5) {
+                if (totalWeight <= 0.5) {
                     return 12.50;
-                } else if (product.weight <= 1) {
+                } else if (totalWeight <= 1) {
                     return 20.00;
                 } else {
-                    return 46.50 + (1.50 * Math.ceil((product.weight - 1) * 10));
+                    return 46.50 + (1.50 * Math.ceil((totalWeight - 1) * 10));
                 }
-                break;
-
             case RETIRADA:
                 return 0;
 
