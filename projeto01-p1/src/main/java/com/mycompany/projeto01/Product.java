@@ -1,4 +1,4 @@
-package projeto1;
+package com.mycompany.projeto01;
 
 public class Product {
     public String name;

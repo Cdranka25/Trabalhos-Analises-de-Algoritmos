@@ -1,9 +1,8 @@
-package projeto1;
+package com.mycompany.projeto01;
 
+import com.mycompany.projeto01.shipping.ShippingMethod;
 import java.util.ArrayList;
 import java.util.List;
-
-import main.java.projeto1.shipping.ShippingMethod;
 
 public class Order {
     private List<Product> products;
@@ -36,13 +35,5 @@ public class Order {
             total += p.weight;
         }
         return total;
-    }
-
-    public void listProducts() {
-        System.out.println("Pedido #" + id);
-        for (Product p : products) {
-            System.out.println(p.name + " - " + p.weight + "kg - R$ " + p.price);
-        }
-        System.out.println("Total: R$ " + totalPrice());
     }
 }

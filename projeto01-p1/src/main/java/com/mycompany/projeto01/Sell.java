@@ -1,6 +1,7 @@
-package projeto1;
+package com.mycompany.projeto01;
 
-import main.java.projeto1.shipping.ShippingMethod;
+import com.mycompany.projeto01.Order;
+
 
 public class Sell {
     public double calculateTotal(Order order) {
