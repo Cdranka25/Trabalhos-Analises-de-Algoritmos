@@ -3,22 +3,22 @@ package projeto1;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.projeto1.shipping.ShippingMethod;
 
 public class Order {
-    
-    private int id;
     private List<Product> products;
+    public ShippingMethod shippingMethod;
 
-    public Order(int id) {
-        this.id = id;
+    public Order(ShippingMethod shippingMethod) {
         this.products = new ArrayList<>();
+        this.shippingMethod = shippingMethod;
     }
 
     public void addProduct(Product product) {
         products.add(product);
     }
 
-    public void removeProduct(Product prodcut){
+    public void removeProduct(Product prodcut) {
         products.add(prodcut);
     }
 
@@ -30,16 +30,15 @@ public class Order {
         return total;
     }
 
-    public double totalWeight(){
+    public double totalWeight() {
         double total = 0;
-        for (Product p : products){
+        for (Product p : products) {
             total += p.weight;
         }
         return total;
     }
 
-
-        public void listProducts() {
+    public void listProducts() {
         System.out.println("Pedido #" + id);
         for (Product p : products) {
             System.out.println(p.name + " - " + p.weight + "kg - R$ " + p.price);
@@ -47,4 +46,3 @@ public class Order {
         System.out.println("Total: R$ " + totalPrice());
     }
 }
-
