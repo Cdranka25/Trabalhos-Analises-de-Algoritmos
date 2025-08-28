@@ -1,3 +1,4 @@
+package model;
 public class ArCondicionadoGellaKaza {
     private int temperatura;
     private boolean ligado;

@@ -1,3 +1,4 @@
+package model;
 public class ArCondicionadoVentoBaumn {
     private int temperatura;
     private boolean ligado;
