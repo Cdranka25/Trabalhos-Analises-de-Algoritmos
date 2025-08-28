@@ -11,7 +11,7 @@ public class ArCondicionadoVentoBaumn {
     }
 
     public void definirTemperatura(int temperatura) {
-
+        this.temperatura = temperatura;
     }
 
     public boolean estaLigado() {
