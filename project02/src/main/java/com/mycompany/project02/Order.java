@@ -8,11 +8,6 @@ package com.mycompany.project02;
  *
  * @author vergiliogu
  */
-enum OrderType {
-    BUY,
-    SELL
-}
-
 public class Order {
     public OrderType orderType;
     public Double price;

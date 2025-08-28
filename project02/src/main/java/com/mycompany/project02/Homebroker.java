@@ -4,6 +4,8 @@
 
 package com.mycompany.project02;
 
+import java.util.Locale;
+
 /**
  *
  * @author vergiliogu
@@ -12,8 +14,13 @@ public class Homebroker {
     private NotificationService notificationService = NotificationService.letsGooo();
     private StockMarket stockMarket = new StockMarket();
 
+    public Homebroker(NotificationService notificationService, StockMarket stockMarket) {
+        this.notificationService = notificationService;
+        this.stockMarket = stockMarket;
+    }
+
     public static Homebroker letsGooo() {
-        return new Homebroker();
+        return new Homebroker(NotificationService.letsGooo(), new StockMarket());
     }
 
     public void registerOrder(Order order) {
@@ -22,7 +29,7 @@ public class Homebroker {
 
     public String getStockPrice(String stockCode) {
         Double price = stockMarket.getStockPrice(stockCode);
-        return String.format("%s: %.2f", stockCode,price);
+        return String.format(Locale.US, "%s: %.2f", stockCode, price);
     }
 
     public void subscribeInvestor(Investor investor, Stock stock) {

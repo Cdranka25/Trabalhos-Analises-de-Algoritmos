@@ -4,6 +4,9 @@
  */
 package com.mycompany.project02;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,6 +18,11 @@ public class StockMarket {
   private List<Order> orders;
   private List<Stock> stocks;
 
+  public StockMarket() {
+    this.orders = new ArrayList<>();
+    this.stocks = new ArrayList<>();
+  }
+
   public void addOrder(Order order) {
     orders.add(order);
 
@@ -22,13 +30,20 @@ public class StockMarket {
   }
 
   public void searchForMatchingOrders(Order newOrder) {
-    for (Order existingOrder : orders) {
+    Iterator<Order> iterator = orders.iterator();
+    while (iterator.hasNext()) {
+      Order existingOrder = iterator.next();
       if (existingOrder.stock.code.equals(newOrder.stock.code) &&
           existingOrder.orderType != newOrder.orderType &&
           existingOrder.price.equals(newOrder.price)) {
-            removeMatchingOrders(newOrder, existingOrder);
-            updateStockPrice(newOrder.stock, newOrder.price);
-            notificationService.notifyInvestors(newOrder.stock);
+
+        iterator.remove();
+
+        orders.remove(newOrder);
+
+        updateStockPrice(newOrder.stock, newOrder.price);
+        notificationService.notifyInvestors(newOrder.stock);
+        return;
       }
     }
   }
@@ -54,5 +69,9 @@ public class StockMarket {
     }
 
     throw new IllegalArgumentException("Stock with code " + stockCode + " not found.");
+  }
+
+  public List<Stock> getStocks() {
+    return Collections.unmodifiableList(this.stocks);
   }
 }
