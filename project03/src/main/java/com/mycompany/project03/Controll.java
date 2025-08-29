@@ -4,10 +4,12 @@
 
 package com.mycompany.project03;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mycompany.project03.Adapters.ArCondicionado.ArCondicionadoAdapter;
 import com.mycompany.project03.Adapters.Lampada.LampadaAdapter;
+import com.mycompany.project03.Adapters.Persianas.PersianasAdapter;
 
 /**
  *
@@ -16,13 +18,19 @@ import com.mycompany.project03.Adapters.Lampada.LampadaAdapter;
 public class Controll {
     private List<LampadaAdapter> lampadas;
     private List<ArCondicionadoAdapter> arcondicionados;
-    // private List<LampadaAdapter> persianas;
+    private List<PersianasAdapter> persianas;
 
     // public static void main(String[] args) {
-    //     LampadaPhellipes lp = new LampadaPhellipes();
-    //     lp.setIntensidade(98);
-    //     System.out.println(lp.getIntensidade());
+    // LampadaPhellipes lp = new LampadaPhellipes();
+    // lp.setIntensidade(98);
+    // System.out.println(lp.getIntensidade());
     // }
+
+    public Controll() {
+        this.lampadas = new ArrayList<>();
+        this.arcondicionados = new ArrayList<>();
+        this.persianas = new ArrayList<>();
+    }
 
     public void newBulb(LampadaAdapter lampada) {
         lampadas.add(lampada);
@@ -74,8 +82,36 @@ public class Controll {
         }
     }
 
-    // public void newBlind(LampadaAdapter persiana) {
-    //     persianas.add(persiana);
-    // }
+    public void newBlind(PersianasAdapter persiana) {
+        persianas.add(persiana);
+    }
 
+    public void modoSono() {
+        for (LampadaAdapter lampada : lampadas) {
+            lampada.desligar();
+        }
+
+        for (ArCondicionadoAdapter ar : arcondicionados) {
+            ar.desligar();
+        }
+
+        for (PersianasAdapter p : persianas) {
+            p.lower();
+        }
+    }
+
+    public void modoTrabalho() {
+        for (LampadaAdapter lampada : lampadas) {
+            lampada.ligar();
+        }
+
+        for (ArCondicionadoAdapter ar : arcondicionados) {
+            ar.ligar();
+            ar.setTemperature(25);
+        }
+
+        for (PersianasAdapter p : persianas) {
+            p.rise();
+        }
+    }
 }

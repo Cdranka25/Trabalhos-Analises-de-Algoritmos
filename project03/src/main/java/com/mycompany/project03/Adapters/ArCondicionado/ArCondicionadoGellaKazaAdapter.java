@@ -37,9 +37,9 @@ public class ArCondicionadoGellaKazaAdapter implements ArCondicionadoAdapter {
 
     for (int i = 0; i < Math.abs(diferenca); i++) {
       if (diferenca > 0) {
-        arCondicionado.diminuirTemperatura();
-      } else {
         arCondicionado.aumentarTemperatura();
+      } else if (diferenca < 0) {
+        arCondicionado.diminuirTemperatura();
       }
     }
   }
