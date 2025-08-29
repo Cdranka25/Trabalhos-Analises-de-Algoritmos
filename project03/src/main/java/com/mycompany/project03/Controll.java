@@ -6,7 +6,8 @@ package com.mycompany.project03;
 
 import java.util.List;
 
-import com.mycompany.project03.Adapters.LampadaAdapter;
+import com.mycompany.project03.Adapters.ArCondicionado.ArCondicionadoAdapter;
+import com.mycompany.project03.Adapters.Lampada.LampadaAdapter;
 
 /**
  *
@@ -14,7 +15,7 @@ import com.mycompany.project03.Adapters.LampadaAdapter;
  */
 public class Controll {
     private List<LampadaAdapter> lampadas;
-    // private List<LampadaAdapter> arcondicionados;
+    private List<ArCondicionadoAdapter> arcondicionados;
     // private List<LampadaAdapter> persianas;
 
     // public static void main(String[] args) {
@@ -39,9 +40,39 @@ public class Controll {
         }
     }
 
-    // public void newAirConditioner(LampadaAdapter arcondicionado) {
-    //     arcondicionados.add(arcondicionado);
-    // }
+    public void newAirConditioner(ArCondicionadoAdapter arcondicionado) {
+        arcondicionados.add(arcondicionado);
+    }
+
+    public void turnOnAllAirConditioners() {
+        for (ArCondicionadoAdapter arcondicionado : arcondicionados) {
+            arcondicionado.ligar();
+        }
+    }
+
+    public void turnOffAllAirConditioners() {
+        for (ArCondicionadoAdapter arcondicionado : arcondicionados) {
+            arcondicionado.desligar();
+        }
+    }
+
+    public void increaseAllAirConditionersTemperature() {
+        for (ArCondicionadoAdapter arcondicionado : arcondicionados) {
+            arcondicionado.increaseTemperature();
+        }
+    }
+
+    public void decreaseAllAirConditionersTemperature() {
+        for (ArCondicionadoAdapter arcondicionado : arcondicionados) {
+            arcondicionado.decreaseTemperature();
+        }
+    }
+
+    public void setAllAirConditionersTemperature(int temperatura) {
+        for (ArCondicionadoAdapter arcondicionado : arcondicionados) {
+            arcondicionado.setTemperature(temperatura);
+        }
+    }
 
     // public void newBlind(LampadaAdapter persiana) {
     //     persianas.add(persiana);

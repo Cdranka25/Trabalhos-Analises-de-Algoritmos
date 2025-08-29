@@ -1,4 +1,4 @@
-package com.mycompany.project03.Adapters;
+package com.mycompany.project03.Adapters.Lampada;
 
 import br.furb.analise.algoritmos.LampadaPhellipes;
 
