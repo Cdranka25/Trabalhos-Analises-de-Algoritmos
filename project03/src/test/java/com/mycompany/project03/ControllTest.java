@@ -3,86 +3,83 @@ package com.mycompany.project03;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.mycompany.project03.Controll;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
-class FakeLampada implements com.mycompany.project03.Adapters.Lampada.LampadaAdapter {
-    boolean ligada = false;
-
-    @Override
-    public void ligar() {
-        ligada = true;
-    }
-
-    @Override
-    public void desligar() {
-        ligada = false;
-    }
-
-    public boolean isLigada() {
-        return ligada;
-    }
-}
-
-class FakeArCondicionado implements com.mycompany.project03.Adapters.ArCondicionado.ArCondicionadoAdapter {
-    boolean ligado = false;
-    int temperatura = 24;
-
-    @Override
-    public void ligar() {
-        ligado = true;
-    }
-
-    @Override
-    public void desligar() {
-        ligado = false;
-    }
-
-    @Override
-    public void increaseTemperature() {
-        temperatura++;
-    }
-
-    @Override
-    public void decreaseTemperature() {
-        temperatura--;
-    }
-
-    @Override
-    public void setTemperature(int temperatura) {
-        this.temperatura = temperatura;
-    }
-
-    public boolean isLigado() {
-        return ligado;
-    }
-
-    public int getTemperatura() {
-        return temperatura;
-    }
-}
-
-class FakePersiana implements com.mycompany.project03.Adapters.Persianas.PersianasAdapter {
-    boolean levantada = true;
-
-    @Override
-    public void rise() {
-        levantada = true;
-    }
-
-    @Override
-    public void lower() {
-        levantada = false;
-    }
-
-    public boolean isLevantada() {
-        return levantada;
-    }
-}
-
 public class ControllTest {
+
+    static class FakeLampada implements com.mycompany.project03.Adapters.Lampada.LampadaAdapter {
+        private boolean ligada = false;
+
+        @Override
+        public void ligar() {
+            ligada = true;
+        }
+
+        @Override
+        public void desligar() {
+            ligada = false;
+        }
+
+        public boolean isLigada() {
+            return ligada;
+        }
+    }
+
+    static class FakeArCondicionado implements com.mycompany.project03.Adapters.ArCondicionado.ArCondicionadoAdapter {
+        private boolean ligado = false;
+        private int temperatura = 24;
+
+        @Override
+        public void ligar() {
+            ligado = true;
+        }
+
+        @Override
+        public void desligar() {
+            ligado = false;
+        }
+
+        @Override
+        public void increaseTemperature() {
+            temperatura++;
+        }
+
+        @Override
+        public void decreaseTemperature() {
+            temperatura--;
+        }
+
+        @Override
+        public void setTemperature(int temperatura) {
+            this.temperatura = temperatura;
+        }
+
+        public boolean isLigado() {
+            return ligado;
+        }
+
+        public int getTemperatura() {
+            return temperatura;
+        }
+    }
+
+    static class FakePersiana implements com.mycompany.project03.Adapters.Persianas.PersianasAdapter {
+        private boolean levantada = true;
+
+        @Override
+        public void rise() {
+            levantada = true;
+        }
+
+        @Override
+        public void lower() {
+            levantada = false;
+        }
+
+        public boolean isLevantada() {
+            return levantada;
+        }
+    }
 
     private Controll controll;
 
@@ -93,23 +90,23 @@ public class ControllTest {
 
     @Test
     void testTurnOnAllBulbs() {
-        FakeLampada lampada = new FakeLampada();
-        controll.newBulb(lampada);
+        FakeLampada lamp = new FakeLampada();
+        controll.newBulb(lamp);
 
         controll.turnOnAllBulbs();
 
-        assertTrue(lampada.isLigada(), "A lâmpada deveria estar ligada");
+        assertTrue(lamp.isLigada(), "A lâmpada deveria estar ligada");
     }
 
     @Test
     void testTurnOffAllBulbs() {
-        FakeLampada lampada = new FakeLampada();
-        lampada.ligar();
-        controll.newBulb(lampada);
+        FakeLampada lamp = new FakeLampada();
+        lamp.ligar(); 
+        controll.newBulb(lamp);
 
         controll.turnOffAllBulbs();
 
-        assertFalse(lampada.isLigada(), "A lâmpada deveria estar desligada");
+        assertFalse(lamp.isLigada(), "A lâmpada deveria estar desligada");
     }
 
     @Test
@@ -134,40 +131,40 @@ public class ControllTest {
 
     @Test
     void testModoSono() {
-        FakeLampada lampada = new FakeLampada();
+        FakeLampada lamp = new FakeLampada();
         FakeArCondicionado ar = new FakeArCondicionado();
-        FakePersiana persiana = new FakePersiana();
+        FakePersiana pers = new FakePersiana();
 
-        lampada.ligar();
+        lamp.ligar();
         ar.ligar();
-        persiana.rise();
+        pers.rise();
 
-        controll.newBulb(lampada);
+        controll.newBulb(lamp);
         controll.newAirConditioner(ar);
-        controll.newBlind(persiana);
+        controll.newBlind(pers);
 
         controll.modoSono();
 
-        assertFalse(lampada.isLigada(), "Lâmpada deveria estar desligada no modo sono");
+        assertFalse(lamp.isLigada(), "Lâmpada deveria estar desligada no modo sono");
         assertFalse(ar.isLigado(), "Ar-condicionado deveria estar desligado no modo sono");
-        assertFalse(persiana.isLevantada(), "Persiana deveria estar abaixada no modo sono");
+        assertFalse(pers.isLevantada(), "Persiana deveria estar abaixada no modo sono");
     }
 
     @Test
     void testModoTrabalho() {
-        FakeLampada lampada = new FakeLampada();
+        FakeLampada lamp = new FakeLampada();
         FakeArCondicionado ar = new FakeArCondicionado();
-        FakePersiana persiana = new FakePersiana();
+        FakePersiana pers = new FakePersiana();
 
-        controll.newBulb(lampada);
+        controll.newBulb(lamp);
         controll.newAirConditioner(ar);
-        controll.newBlind(persiana);
+        controll.newBlind(pers);
 
         controll.modoTrabalho();
 
-        assertTrue(lampada.isLigada(), "Lâmpada deveria estar ligada no modo trabalho");
+        assertTrue(lamp.isLigada(), "Lâmpada deveria estar ligada no modo trabalho");
         assertTrue(ar.isLigado(), "Ar-condicionado deveria estar ligado no modo trabalho");
         assertEquals(25, ar.getTemperatura(), "Ar-condicionado deveria estar em 25°C no modo trabalho");
-        assertTrue(persiana.isLevantada(), "Persiana deveria estar levantada no modo trabalho");
+        assertTrue(pers.isLevantada(), "Persiana deveria estar levantada no modo trabalho");
     }
 }
