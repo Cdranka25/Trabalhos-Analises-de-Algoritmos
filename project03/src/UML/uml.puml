@@ -1,0 +1,94 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Controll {
+  - lampadas: List<ILampadaAdapter>
+  - arcondicionados: List<IArCondicionadoAdapter>
+  - persianas: List<IPersianasAdapter>
+  + newBulb(LampadaAdapter): void
+  + turnOnAllBulbs(): void
+  + turnOffAllBulbs(): void
+  + newAirConditioner(ArCondicionadoAdapter): void
+  + turnOnAllAirConditioners(): void
+  + turnOffAllAirConditioners(): void
+  + increaseAllAirConditionersTemperature(): void
+  + decreaseAllAirConditionersTemperature(): void
+  + setAllAirConditionersTemperature(int): void
+  + newBlind(PersianasAdapter): void
+  + modoSono(): void
+  + modoTrabalho(): void
+}
+
+interface ILampadaAdapter {
+  + ligar(): void
+  + desligar(): void
+}
+
+interface IArCondicionadoAdapter {
+  + ligar(): void
+  + desligar(): void
+  + increaseTemperature(): void
+  + decreaseTemperature(): void
+  + setTemperature(int): void
+}
+
+interface IPersianasAdapter {
+  + rise(): void
+  + lower(): void
+}
+
+class LampadaPhellipesAdapter {
+  - lampada: LampadaPhellipes
+  + ligar(): void
+  + desligar(): void
+}
+
+class LampadaShoyuMiAdapter {
+  - lampada: LampadaShoyuMi
+  + ligar(): void
+  + desligar(): void
+}
+
+class ArCondicionadoGellaKazaAdapter {
+  - arCondicionado: ArCondicionadoGellaKaza
+  + ligar(): void
+  + desligar(): void
+  + increaseTemperature(): void
+  + decreaseTemperature(): void
+  + setTemperature(int): void
+}
+
+class ArCondicionadoVentoBaumnAdapter {
+  - arCondicionado: ArCondicionadoVentoBaumn
+  + ligar(): void
+  + desligar(): void
+  + increaseTemperature(): void
+  + decreaseTemperature(): void
+  + setTemperature(int): void
+}
+
+class PersianaNatLightAdapter {
+  - persiana: PersianaNatLight
+  + rise(): void
+  + lower(): void
+}
+
+class PersianaSolariusAdapter {
+  - persiana: PersianaSolarius
+  + rise(): void
+  + lower(): void
+}
+
+Controll o-- "0..*" ILampadaAdapter
+Controll o-- "0..*" IArCondicionadoAdapter
+Controll o-- "0..*" IPersianasAdapter
+
+LampadaPhellipesAdapter ..|> ILampadaAdapter
+LampadaShoyuMiAdapter ..|> ILampadaAdapter
+ArCondicionadoGellaKazaAdapter ..|> IArCondicionadoAdapter
+ArCondicionadoVentoBaumnAdapter ..|> IArCondicionadoAdapter
+PersianaNatLightAdapter ..|> IPersianasAdapter
+PersianaSolariusAdapter ..|> IPersianasAdapter
+
+@enduml
